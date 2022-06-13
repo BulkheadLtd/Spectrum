@@ -1,0 +1,31 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.1",
+	"FriendlyName": "Spectrum",
+	"Description": "Spectrum Debugger.",
+	"Category": "BULKHEAD Limited",
+	"CreatedBy": "BULKHEAD Limited",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"EnabledByDefault": false,
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "Spectrum",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [ "Win64", "Android", "Mac", "IOS", "Linux" ]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ImGui",
+			"Enabled": true
+		}
+	]
+}
