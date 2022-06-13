@@ -1,4 +1,6 @@
-﻿#include "SpectrumRingBuffer.h"
+﻿// Copyright BULKHEAD Limited. All Rights Reserved.
+
+#include "SpectrumRingBuffer.h"
 
 ImPlotPoint USpectrumRealtimePlotRingBuffer::ImPlotGetterFunc(void* UserData, int Index)
 {
