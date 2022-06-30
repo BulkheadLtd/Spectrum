@@ -1,4 +1,4 @@
-// Copyright Bulkhead Interactive Limited. All Rights Reserved.
+// Copyright BULKHEAD Limited. All Rights Reserved.
 
 using UnrealBuildTool;
 
@@ -34,13 +34,6 @@ public class Spectrum : ModuleRules
 			"ImGui"
 		});
 
-		// Tell Windows we want to import the ImPlot symbols when linking against ImGui plugin
-		if(Target.Platform == UnrealTargetPlatform.Win64)
-		{
-			PrivateDefinitions.Add("IMGUI_API=DLLIMPORT");
-			PrivateDefinitions.Add("IMPLOT_API=DLLIMPORT");
-		}
-		
-		PublicDefinitions.Add("WITH_SPECTRUM");
+		PublicDefinitions.Add("WITH_SPECTRUM=1");
 	}
 }

@@ -2,6 +2,8 @@
 
 #include "SpectrumRingBuffer.h"
 
+#include <implot.h>
+
 ImPlotPoint USpectrumRealtimePlotRingBuffer::ImPlotGetterFunc(void* UserData, int Index)
 {
 	ImPlotPoint Point;

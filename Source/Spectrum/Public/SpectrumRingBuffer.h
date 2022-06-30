@@ -5,9 +5,9 @@
 #include <CoreMinimal.h>
 #include <UObject/Object.h>
 
-#include <implot.h>
-
 #include "SpectrumRingBuffer.generated.h"
+
+struct ImPlotPoint;
 
 UCLASS()
 class USpectrumRealtimePlotRingBuffer : public UObject

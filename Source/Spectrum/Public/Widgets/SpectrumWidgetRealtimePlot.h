@@ -4,8 +4,6 @@
 
 #include <CoreMinimal.h>
 
-#include <implot.h>
-
 #include "SpectrumRingBuffer.h"
 #include "SpectrumWidgetBase.h"
 
@@ -25,7 +23,7 @@ struct FSpectrumWidgetPlotInfo
 	TObjectPtr<USpectrumRealtimePlotRingBuffer> BufferLower = nullptr;
 
 	bool bUseCustomColor = false;
-	ImVec4 Color;
+	FLinearColor Color = FLinearColor::White;
 };
 
 UCLASS()
@@ -35,10 +33,10 @@ class SPECTRUM_API USpectrumWidgetRealtimePlot : public USpectrumWidgetBase
 
 	struct FTagInfo
 	{
-		FName TagName = "";
-		double YPos = 0.f;
-		ImVec4 Color = ImVec4();
-		ImVec4 LineColor = ImVec4();
+		FName TagName = NAME_None;
+		double YPos = 0.0;
+		FLinearColor Color = FLinearColor::White;
+		FLinearColor LineColor = FLinearColor::White;
 	};
 
 public:

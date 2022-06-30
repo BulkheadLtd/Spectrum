@@ -6,12 +6,16 @@
 #include <Developer/DesktopPlatform/Public/IDesktopPlatform.h>
 #include <Developer/DesktopPlatform/Public/DesktopPlatformModule.h>
 
+#include <GenericPlatform/GenericWindow.h>
+#include <Widgets/SWindow.h>
+
 #include <Engine/Engine.h>
 #include <Engine/GameViewportClient.h>
 
 #include <Misc/FileHelper.h>
 
 #include <imgui.h>
+#include <implot.h>
 
 #include "SpectrumUtils.h"
 
@@ -80,8 +84,8 @@ bool USpectrumWidgetRealtimePlot::BeginInternal(const UWorld* World)
 
 			if (PlotInfo.bUseCustomColor)
 			{
-				ImPlot::PushStyleColor(ImPlotCol_Fill, PlotInfo.Color);
-				ImPlot::PushStyleColor(ImPlotCol_Line, PlotInfo.Color);
+				ImPlot::PushStyleColor(ImPlotCol_Fill, UEColorToImVec4(PlotInfo.Color));
+				ImPlot::PushStyleColor(ImPlotCol_Line, UEColorToImVec4(PlotInfo.Color));
 			}
 
 			// #TODO(): [07/03/2022] Downsampler for displaying dense plots without frames dipping
@@ -115,8 +119,8 @@ bool USpectrumWidgetRealtimePlot::BeginInternal(const UWorld* World)
 			{
 				FTagInfo& TagInfo = TagInfoPair.Value;
 
-				ImPlot::DragLineY(TagIndex, &TagInfo.YPos, TagInfo.LineColor, 1, ImPlotDragToolFlags_NoInputs | ImPlotDragToolFlags_NoCursors);
-				ImPlot::TagY(TagInfo.YPos, TagInfo.Color, TCHAR_TO_ANSI(*TagInfo.TagName.ToString()), "");
+				ImPlot::DragLineY(TagIndex, &TagInfo.YPos, UEColorToImVec4(TagInfo.LineColor), 1, ImPlotDragToolFlags_NoInputs | ImPlotDragToolFlags_NoCursors);
+				ImPlot::TagY(TagInfo.YPos, UEColorToImVec4(TagInfo.Color), TCHAR_TO_ANSI(*TagInfo.TagName.ToString()), "");
 
 				TagIndex++;
 			}
@@ -184,7 +188,7 @@ void USpectrumWidgetRealtimePlot::AddPlot(const FName& PlotName, const FName& Pl
 		if (FSpectrumWidgetPlotInfo* NewPlotInfo = Plots.Find(PlotName))
 		{
 			NewPlotInfo->bUseCustomColor = true;
-			NewPlotInfo->Color = UEColorToImVec4(Color);
+			NewPlotInfo->Color = Color;
 		}
 	}
 }
@@ -206,9 +210,9 @@ void USpectrumWidgetRealtimePlot::AddTag(const FName& TagName, const float YPos,
 	FTagInfo& NewTagInfo = Tags.FindOrAdd(TagName);
 	NewTagInfo.TagName   = TagName;
 	NewTagInfo.YPos      = YPos;
-	NewTagInfo.Color     = UEColorToImVec4(Color);
-	NewTagInfo.LineColor = UEColorToImVec4(Color);
-	NewTagInfo.LineColor.w = 0.3f; // Make line slightly less obnoxious
+	NewTagInfo.Color     = Color;
+	NewTagInfo.LineColor = Color;
+	NewTagInfo.LineColor.A = 0.3f; // Make line slightly less obnoxious
 }
 
 void USpectrumWidgetRealtimePlot::PushPoint(const FName& PlotName, float A)
